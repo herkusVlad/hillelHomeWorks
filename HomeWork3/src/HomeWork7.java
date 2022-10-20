@@ -1,9 +1,5 @@
 
 public class HomeWork7 {
-    String format = "┌------------------------------------------┐" +
-            "│      %s     │      %s      │      %s     │" +
-            "├------------------------------------------┤";
-
     public static void main(String[] args) throws InterruptedException {
         double x = 5;
 
