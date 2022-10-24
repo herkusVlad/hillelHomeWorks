@@ -1,6 +1,9 @@
+package HomeWorks;
 
-public class HomeWork7 {
-    public static void main(String[] args) throws InterruptedException {
+public class HomeWork7 implements HomeWorkManager {
+
+    @Override
+    public void run() {
         double x = 5;
 
         System.out.println("┌------------------------------------------┐");
@@ -11,11 +14,19 @@ public class HomeWork7 {
             arr[2] = x * i;
 
             System.out.printf("\t%s\t\t*\t%s\t\t=\t%s\t\t\n", arr[0], arr[1], arr[2]);
-            Thread.sleep(50);
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             if (i != 10) {
                 System.out.print("├------------------------------------------┤\n");
             }
-            Thread.sleep(50);
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
         System.out.println("└------------------------------------------┘");
     }

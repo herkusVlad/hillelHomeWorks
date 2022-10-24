@@ -1,7 +1,10 @@
+package HomeWorks;
+
 import java.util.Random;
 
-public class HomeWork10 {
-    public static void main(String[] args) {
+public class HomeWork10 implements HomeWorkManager {
+    @Override
+    public void run() {
         int n = 5;
         int [][]arr = new int[5][5];
         for (int i=0;i<n;i++){

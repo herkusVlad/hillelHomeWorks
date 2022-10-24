@@ -1,5 +1,8 @@
-public class HomeWork11 {
-    public static void main(String[] args) {
+package HomeWorks;
+
+public class HomeWork11 implements HomeWorkManager {
+    @Override
+    public void run() {
         int[] arr = {1, 2, 3, -5, 3, 10};
         int minIndex = 0;
         int maxIndex = 0;

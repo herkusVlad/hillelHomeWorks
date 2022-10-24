@@ -1,5 +1,9 @@
-public class HomeWork4 {
-    public static void main(String[] args) {
+package HomeWorks;
+
+public class HomeWork4 implements HomeWorkManager {
+
+    @Override
+    public void run() {
         int i=0;
         do{
             if(i % 2 != 0) System.out.println(i);

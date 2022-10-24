@@ -1,5 +1,8 @@
-public class HomeWork3 {
-    public static void main(String[] args) {
+package HomeWorks;
+
+public class HomeWork3 implements HomeWorkManager {
+    @Override
+    public void run() {
         int i=0;
         while(i<100){
             if(i % 2 != 0) System.out.println(i);

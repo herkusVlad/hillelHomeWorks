@@ -1,6 +1,8 @@
+package HomeWorks;
 
-public class HomeWork13 {
-    public static void main(String[] args) {
+public class HomeWork13 implements HomeWorkManager {
+    @Override
+    public void run() {
         char[][] arr = new char[8][8];
         char[] symbolsArr = {'W','B'};
         for (int i=0;i<8;i++){
@@ -12,11 +14,11 @@ public class HomeWork13 {
                     symbolsArr[1] = 'W';
                     symbolsArr[0] = 'B';
                 }
-                    if(j%2 == 0){
-                        arr[i][j] = symbolsArr[0];
-                    }else{
-                        arr[i][j] = symbolsArr[1];
-                    }
+                if(j%2 == 0){
+                    arr[i][j] = symbolsArr[0];
+                }else{
+                    arr[i][j] = symbolsArr[1];
+                }
             }
         }
 

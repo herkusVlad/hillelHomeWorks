@@ -1,5 +1,8 @@
-public class HomeWork5 {
-    public static void main(String[] args) {
+package HomeWorks;
+
+public class HomeWork5 implements HomeWorkManager {
+    @Override
+    public void run() {
         int x = 10;
         int n = 5;
         int result = 1;

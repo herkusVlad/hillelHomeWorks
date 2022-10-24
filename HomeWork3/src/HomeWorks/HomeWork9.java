@@ -1,7 +1,10 @@
+package HomeWorks;
+
 import java.util.Random;
 
-public class HomeWork9 {
-    public static void main(String[] args) {
+public class HomeWork9 implements HomeWorkManager {
+    @Override
+    public void run() {
         int n = 5;
         int [][]arr = new int[5][5];
         for (int i=0;i<n;i++){
@@ -19,13 +22,13 @@ public class HomeWork9 {
         int min = arr[0][0];
         for (int i=0;i<n;i++){
             for (int j=0;j<n;j++){
-               if(min == arr[i][j]){
+                if(min == arr[i][j]){
                     counterRepeat++;
-               }
-               if(min > arr[i][j]){
-                   min= arr[i][j];
-                   counterRepeat=0;
-               }
+                }
+                if(min > arr[i][j]){
+                    min= arr[i][j];
+                    counterRepeat=0;
+                }
             }
         }
 

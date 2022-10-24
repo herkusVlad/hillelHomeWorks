@@ -1,7 +1,9 @@
-import java.util.Arrays;
+package HomeWorks;
 
-public class HomeWork8 {
-    public static void main(String[] args) {
+public class HomeWork8 implements HomeWorkManager {
+
+    @Override
+    public void run() {
         int[] arr = new int[10];
         for (int i=1, j =0; j<10; i++){
             if(i % 2 != 0){
