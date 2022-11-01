@@ -37,7 +37,7 @@ public class Subscriber {
 
     @Override
     public String toString() {
-        return "Student: " + ID + " "
+        return "User: " + ID + " "
                 + lastName +
                 " " + firstName +
                 " " + thirdName + ',' +
