@@ -34,7 +34,7 @@ public class RunApplication {
         System.out.println("Delete all 1 from collection : "+ collection.deleteAll("1"));
         System.out.println(collection + "\n");
 
-        System.out.println("Get second element from collection : "+ collection.get(1));
-        System.out.println(collection + "\n");
+        System.out.println("Get second element from collection : " + collection.get(1));
+        System.out.println(collection.get(1) + "\n");
     }
 }
