@@ -1,5 +1,8 @@
 package Collection;
 
+import java.util.Date;
+import java.util.UUID;
+
 public class HandCollection implements MyCollection{
 
     private String[] strArr;
@@ -7,14 +10,16 @@ public class HandCollection implements MyCollection{
     private int extensionIndex;
     //Указатель на текущий элемент в массиве
     private int actualIndex = 0;
+    //Уникальная строка для обозначения пустых элементов в коллекции
+    private String emptyStr = UUID.randomUUID().toString() + new Date().getTime();
 
     public HandCollection(){
-        strArr = new String[10];
+        strArr = createArray(10);
         extensionIndex = strArr.length - 3;
     }
 
     public HandCollection(int size){
-        strArr = new String[size];
+        strArr = createArray(size);
         extensionIndex = size >= 5 ? size -3 : size - 1;
     }
 
@@ -27,7 +32,7 @@ public class HandCollection implements MyCollection{
     public String toString() {
         String toString = "";
         for(String str : strArr){
-            if(str!=null){
+            if(str != emptyStr){
                 toString+= str + " ";
             }
         }
@@ -40,16 +45,16 @@ public class HandCollection implements MyCollection{
     @Override
     public boolean add(int index, String value) {
         try{
-            if(strArr[index] == null){
+            if(strArr[index] == emptyStr){
                 strArr[index]= value;
                 checkNeedAndExtensionArray();
-                replaceNullToValue();
+                replaceEmptyToValue();
                 return true;
             }else {
                 traveledArray(index);
             }
             strArr[index] = value;
-            replaceNullToValue();
+            replaceEmptyToValue();
         }catch (Exception e){
             return false;
         }
@@ -61,10 +66,10 @@ public class HandCollection implements MyCollection{
     @Override
     public boolean add(String value) {
         try{
-            if(strArr[actualIndex+1] == null){
+            if(strArr[actualIndex+1] == emptyStr){
                 strArr[actualIndex++] = value;
             }else{
-                while (strArr[actualIndex] != null){
+                while (strArr[actualIndex] != emptyStr){
                     actualIndex++;
                     if(actualIndex >= strArr.length) extensionArray();
                 }
@@ -82,9 +87,9 @@ public class HandCollection implements MyCollection{
     @Override
     public boolean delete(int index) {
         try{
-            strArr[index] = null;
-            replaceNullToValue();
-            findFirstNull();
+            strArr[index] = emptyStr;
+            replaceEmptyToValue();
+            findFirstEmpty();
         }catch (Exception e){
             return false;
         }
@@ -98,9 +103,9 @@ public class HandCollection implements MyCollection{
         try{
             for (int i=0;i<strArr.length;i++){
                 if(strArr[i].equals(value)){
-                    strArr[i] = null;
-                    replaceNullToValue();
-                    findFirstNull();
+                    strArr[i] = emptyStr;
+                    replaceEmptyToValue();
+                    findFirstEmpty();
                     break;
                 }
             }
@@ -116,11 +121,11 @@ public class HandCollection implements MyCollection{
         try{
             for (int i=0;i<strArr.length;i++){
                 if(value.equals(strArr[i])){
-                    strArr[i] = null;
+                    strArr[i] = emptyStr;
                 }
             }
-            replaceNullToValue();
-            findFirstNull();
+            replaceEmptyToValue();
+            findFirstEmpty();
         }catch (Exception e){
             return false;
         }
@@ -138,15 +143,15 @@ public class HandCollection implements MyCollection{
     }
 
     private void checkNeedAndExtensionArray(){
-        if(strArr.length - nullCounter() >= extensionIndex) {
+        if(strArr.length - emptyCounter() >= extensionIndex) {
             extensionArray();
         }
     }
 
-    private int nullCounter(){
+    private int emptyCounter(){
         int counter = 0;
         for(int i=0;i<strArr.length;i++){
-            if(strArr[i] == null){
+            if(strArr[i] == emptyStr){
                 counter++;
             }
         }
@@ -155,8 +160,12 @@ public class HandCollection implements MyCollection{
 
     private void extensionArray(){
             String[] newArr = new String[strArr.length+10];
-            for(int i=0;i<strArr.length;i++){
-                newArr[i] = strArr[i];
+            for(int i=0;i<newArr.length;i++){
+                if(i<strArr.length){
+                    newArr[i] = strArr[i];
+                }else{
+                    newArr[i] = emptyStr;
+                }
             }
             strArr = newArr;
             extensionIndex = strArr.length -3;
@@ -174,7 +183,7 @@ public class HandCollection implements MyCollection{
                 needCheck = false;
             }
 
-            if(secondItem == null){
+            if(secondItem == emptyStr){
                 strArr[i+1] =firstItem;
                 break;
             }
@@ -185,10 +194,10 @@ public class HandCollection implements MyCollection{
         }
     }
 
-    private void replaceNullToValue(){
-        String[] newArr = new String[strArr.length-nullCounter()];
+    private void replaceEmptyToValue(){
+        String[] newArr = new String[strArr.length-emptyCounter()];
         for(int i=0, j=0;i<strArr.length && j < newArr.length;i++){
-            if(strArr[i]!=null){
+            if(strArr[i] != emptyStr){
                 newArr[j++] = strArr[i];
             }
         }
@@ -196,17 +205,25 @@ public class HandCollection implements MyCollection{
             if(i < newArr.length){
                 strArr[i] = newArr[i];
             }else{
-                strArr[i] = null;
+                strArr[i] = emptyStr;
             }
         }
     }
 
-    private void findFirstNull(){
+    private void findFirstEmpty(){
         for(int i=0;i< strArr.length;i++){
-            if(strArr[i] == null){
+            if(strArr[i] == emptyStr){
                 actualIndex = i;
                 break;
             }
         }
+    }
+
+    private String[] createArray(int size){
+        String[] arr = new String[size];
+        for(int i=0;i<size;i++){
+            arr[i] = emptyStr;
+        }
+        return arr;
     }
 }

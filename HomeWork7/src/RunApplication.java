@@ -13,9 +13,11 @@ public class RunApplication {
         System.out.println("Add some data to collection.");
         collection.add("1");
         collection.add("2");
+        collection.add(null);
         collection.add("1");
         collection.add("3");
         collection.add("1");
+        collection.add(null);
         System.out.println(collection + "\n");
 
         System.out.println("Add string \"b\" into 2 index: "+ collection.add(2,"b") );
