@@ -1,3 +1,5 @@
+package HomeWorkClasses;
+
 import java.util.*;
 /*
  *Имеется коллекция из String, привести все стринги в UPPERCASE и вернуть коллекцию List<Pair>
