@@ -4,7 +4,7 @@ import HomeWorkClasses.StringConverter;
 
 public class RunApplication {
     public static void main(String[] args) {
-        System.out.println("HomeWorkClasses.Average from 1,2,3,4,5,6,7,8,9: " + new Average().average());
+        System.out.println("Average from 1,2,3,4,5,6,7,8,9: " + new Average().average());
 
         System.out.println("\nConvert string to hashmap:");
         new StringConverter().convertToUpperCase().forEach((e, t)-> System.out.println("{"+e+" : "+ t+"}"));
