@@ -3,6 +3,7 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
+//Class with method for gets String number
 public class StringNumber {
     private final List<String> one ;
     private final List<String> two ;

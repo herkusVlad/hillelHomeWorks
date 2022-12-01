@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+//Class for print and parse data from array 'args'
 public class PrinterNumber {
     private List<Integer> list;
     private int iterator = 0;
@@ -34,18 +35,13 @@ public class PrinterNumber {
     }
 
     public void print() {
-        String res = "";
         for(int i=1;i<=5;i++){
             list.stream().map(recNumber::getNumber)
                     .map(e -> e.get(iterator))
                     .forEach(e-> System.out.print(e+" "));
             iterator=i;
             System.out.println();
-
         }
-
-
-
         iterator = 0;
     }
 }

@@ -3,6 +3,7 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
+//Some kind of factory for StringNumber class
 public class RecoveryNumber {
     private StringNumber number = new StringNumber();
 
