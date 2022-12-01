@@ -35,7 +35,7 @@ public class PrinterNumber {
     }
 
     public void print() {
-        for(int i=1;i<=5;i++){
+        for(int i=1;i<=list.size();i++){
             list.stream().map(recNumber::getNumber)
                     .map(e -> e.get(iterator))
                     .forEach(e-> System.out.print(e+" "));
