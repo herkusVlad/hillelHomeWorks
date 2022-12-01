@@ -1,7 +1,6 @@
 package logic;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 //Class for print and parse data from array 'args'
@@ -10,10 +9,13 @@ public class PrinterNumber {
     private int iterator = 0;
     private final RecoveryNumber recNumber = new RecoveryNumber();
 
-    public PrinterNumber(String... args) {
+    public PrinterNumber(String args) {
         list = new ArrayList<>();
-        Arrays.asList(args)
-                .stream()
+        List<String> strList = new ArrayList<>();
+        for(char c : args.toCharArray()){
+            strList.add(String.valueOf(c));
+        }
+        strList.stream()
                 .forEach(e -> {
                     try {
                         list.add(Integer.parseInt(e));
