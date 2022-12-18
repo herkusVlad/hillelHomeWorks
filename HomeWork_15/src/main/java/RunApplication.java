@@ -1,9 +1,7 @@
 import DTO.Computer;
+import DTO.GameResult;
 import DTO.Player;
-import Service.DataConverter;
-import Service.DataConverterImpl;
-import Service.GameController;
-import Service.GameControllerImpl;
+import Service.*;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -13,40 +11,54 @@ public class RunApplication {
         Player player = new Player();
         Computer computer = new Computer();
 
-        GameController gameController = new GameControllerImpl(player,computer);
+        GameController gameController = new GameControllerImpl(player, computer);
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Hello, enter your name : ");
         player.setName(scanner.nextLine());
 
         DataConverter dataConverter = new DataConverterImpl();
+        FileWorker fileWorker = new FileWorkerImpl("my_games");
+        StringBuilder gameResult = new StringBuilder();
+        fileWorker.write("Player name : ".concat(player.getName()).concat("\n"));
         int countGame = 0;
         String endGame = "y";
-        do{
+        do {
             System.out.print("How many game are you want play?");
             countGame = scanner.nextInt();
 
             gameController.startGame();
-            do{
+            do {
                 String value = "1";
+                GameResult roundWinner;
+
                 System.out.print("Enter your value : ");
                 value = scanner.nextLine();
-                if(value.isEmpty()){
-                    value =  scanner.nextLine();
+                if (value.isEmpty()) {
+                    value = scanner.nextLine();
                 }
-                if(value.toLowerCase(Locale.ROOT).equals("stop")){
+                if (value.toLowerCase(Locale.ROOT).equals("stop")) {
                     break;
                 }
                 player.setGameItem(dataConverter.convert(value));
                 gameController.winner();
-                gameController.endRound();
-                countGame--;
-            }while(countGame>0);
-            gameController.endGame();
+                roundWinner = gameController.endRound();
 
-            System.out.println("Do you want play again ? ");
-            endGame = scanner.nextLine().charAt(0)+"";
-        }while (!endGame.equalsIgnoreCase("n"));
+                String roundInfo = "Win in " + player.getCountGame() + " round is " + roundWinner;
+                System.out.println(roundInfo);
+                gameResult.append("\t").append(roundInfo).append("\n");
+                countGame--;
+            } while (countGame > 0);
+            String totalInfo = "Total winner is " + gameController.endGame();
+            System.out.println(totalInfo);
+
+            gameResult.insert(0, totalInfo + "\n").append("\n\n");
+            fileWorker.write(gameResult.toString());
+            gameResult = new StringBuilder();
+
+            System.out.print("Do you want play again ? ");
+            endGame = scanner.nextLine().charAt(0) + "";
+        } while (!endGame.equalsIgnoreCase("n"));
         System.out.println("See you later^_^");
     }
 }

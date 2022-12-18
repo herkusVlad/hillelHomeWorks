@@ -44,25 +44,26 @@ public class GameControllerImpl implements GameController{
         return winner;
     }
 
-    public void endGame() {
+    public GameResult endGame() {
+        GameResult result = GameResult.DRAW;
         if(player.getCountWinGame() > player.getCountLoseGame()){
-            System.out.println("Total winner is " + GameResult.PLAYER);
+            result =  GameResult.PLAYER;
         }else if(player.getCountWinGame() < player.getCountLoseGame()){
-            System.out.println("Total winner is " + GameResult.COMPUTER);
+            result = GameResult.COMPUTER;
         }else{
-            System.out.println("Total winner is " + GameResult.DRAW);
+            result = GameResult.DRAW;
         }
-        System.out.println();
+        return result;
     }
 
     @Override
-    public void endRound() {
+    public GameResult endRound() {
         player.setCountGame(player.getCountGame()+1);
         if(winner == GameResult.PLAYER){
             player.setCountWinGame(player.getCountWinGame()+1);
         }else if(winner == GameResult.COMPUTER){
             player.setCountLoseGame(player.getCountLoseGame()+1);
         }
-        System.out.println("Win in "+player.getCountGame()+" round is " + winner.toString());
+        return winner;
     }
 }

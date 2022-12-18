@@ -8,9 +8,9 @@ import DTO.Player;
 public interface GameController {
     void startGame();
     GameResult winner();
-    void endGame();
+    GameResult endGame();
 
-    void endRound();
+    GameResult endRound();
 
     final class FakeController implements GameController{
 
@@ -42,13 +42,13 @@ public interface GameController {
         }
 
         @Override
-        public void endGame() {
-
+        public GameResult endGame() {
+            return GameResult.DRAW;
         }
 
         @Override
-        public void endRound() {
-
+        public GameResult endRound() {
+            return GameResult.DRAW;
         }
     }
 }
