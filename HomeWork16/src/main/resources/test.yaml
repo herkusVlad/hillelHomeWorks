@@ -1,0 +1,14 @@
+ProductA:
+  Suite:
+    SuiteName_A:
+      Environment_1: ["A","B","C"]
+      Environment_2: ["X","Y","Z"]
+    SuiteName_B:
+      Environment_1: ["E","F","G"]
+      Environment_2: ["K","L","M"]
+  ProductB:
+    Suite:
+      SuiteName_K:
+        Environment_1: ["A1","B2","C3"]
+        Environment_2: ["X1","Y1","Z1"]
+    Text: "text"

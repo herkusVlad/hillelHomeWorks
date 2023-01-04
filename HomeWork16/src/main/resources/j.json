@@ -1,0 +1,71 @@
+[{
+  "id": 1,
+  "first_name": "Delphinia",
+  "last_name": "Insley",
+  "email": "dinsley0@wufoo.com",
+  "gender": "Non-binary",
+  "ip_address": "28.160.223.197"
+}, {
+  "id": 2,
+  "first_name": "Joanie",
+  "last_name": "Brentnall",
+  "email": "jbrentnall1@gov.uk",
+  "gender": "Female",
+  "ip_address": "69.56.253.170"
+}, {
+  "id": 3,
+  "first_name": "Nathan",
+  "last_name": "Henriet",
+  "email": "nhenriet2@google.ru",
+  "gender": "Male",
+  "ip_address": "158.204.149.43"
+}, {
+  "id": 4,
+  "first_name": "Ruperto",
+  "last_name": "Barratt",
+  "email": "rbarratt3@si.edu",
+  "gender": "Male",
+  "ip_address": "250.182.75.96"
+}, {
+  "id": 5,
+  "first_name": "Hodge",
+  "last_name": "Flatt",
+  "email": "hflatt4@wsj.com",
+  "gender": "Male",
+  "ip_address": "126.115.193.115"
+}, {
+  "id": 6,
+  "first_name": "Chaim",
+  "last_name": "Yon",
+  "email": "cyon5@discovery.com",
+  "gender": "Male",
+  "ip_address": "218.183.49.58"
+}, {
+  "id": 7,
+  "first_name": "Davon",
+  "last_name": "Winfield",
+  "email": "dwinfield6@jimdo.com",
+  "gender": "Male",
+  "ip_address": "202.26.131.2"
+}, {
+  "id": 8,
+  "first_name": "Chrotoem",
+  "last_name": "Dumphreys",
+  "email": "cdumphreys7@fotki.com",
+  "gender": "Male",
+  "ip_address": "74.146.43.110"
+}, {
+  "id": 9,
+  "first_name": "Meyer",
+  "last_name": "Robarts",
+  "email": "mrobarts8@amazonaws.com",
+  "gender": "Male",
+  "ip_address": "152.186.238.178"
+}, {
+  "id": 10,
+  "first_name": "Ethel",
+  "last_name": "Graffin",
+  "email": "egraffin9@microsoft.com",
+  "gender": "Female",
+  "ip_address": "42.165.43.149"
+}]
