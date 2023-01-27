@@ -2,11 +2,17 @@ import DTO.Computer;
 import DTO.GameResult;
 import DTO.Player;
 import Service.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Locale;
 import java.util.Scanner;
 
 public class RunApplication {
+    private static final Logger logger = LoggerFactory.getLogger("stdout");
+    private static final Logger liveCycle = LoggerFactory.getLogger("live");
+    private static final Logger result = LoggerFactory.getLogger("result");
+
     public static void main(String[] args) {
         Player player = new Player();
         Computer computer = new Computer();
@@ -14,25 +20,24 @@ public class RunApplication {
         GameController gameController = new GameControllerImpl(player, computer);
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Hello, enter your name : ");
+        logger.info("Hello, enter your name : ");
         player.setName(scanner.nextLine());
 
         DataConverter dataConverter = new DataConverterImpl();
-        FileWorker fileWorker = new FileWorkerImpl("my_games");
-        StringBuilder gameResult = new StringBuilder();
-        fileWorker.write("Player name : ".concat(player.getName()).concat("\n"));
+        logger.info("Player name : ".concat(player.getName()));
         int countGame = 0;
         String endGame = "y";
+        String countPlayerGame = "";
         do {
-            System.out.print("How many game are you want play?");
+            logger.info("How many game are you want play?");
             countGame = scanner.nextInt();
-
+            countPlayerGame = String.valueOf(countGame);
             gameController.startGame();
             do {
                 String value = "1";
                 GameResult roundWinner;
 
-                System.out.print("Enter your value : ");
+                logger.info("Enter your value : ");
                 value = scanner.nextLine();
                 if (value.isEmpty()) {
                     value = scanner.nextLine();
@@ -45,20 +50,17 @@ public class RunApplication {
                 roundWinner = gameController.endRound();
 
                 String roundInfo = "Win in " + player.getCountGame() + " round is " + roundWinner;
-                System.out.println(roundInfo);
-                gameResult.append("\t").append(roundInfo).append("\n");
+                logger.info(roundInfo);
+                liveCycle.info(roundInfo);
                 countGame--;
             } while (countGame > 0);
-            String totalInfo = "Total winner is " + gameController.endGame();
-            System.out.println(totalInfo);
+            String totalInfo = "Total winner is " + gameController.endGame()+". Count rounds : "+ countPlayerGame;
+            logger.info(totalInfo);
+            result.info(totalInfo);
 
-            gameResult.insert(0, totalInfo + "\n").append("\n\n");
-            fileWorker.write(gameResult.toString());
-            gameResult = new StringBuilder();
-
-            System.out.print("Do you want play again ? ");
+            logger.info("Do you want play again ? ");
             endGame = scanner.nextLine().charAt(0) + "";
         } while (!endGame.equalsIgnoreCase("n"));
-        System.out.println("See you later^_^");
+        logger.info("See you later^_^");
     }
 }

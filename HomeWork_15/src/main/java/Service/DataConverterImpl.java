@@ -2,17 +2,20 @@ package Service;
 
 import DTO.GameItem;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Locale;
 import java.util.Objects;
 
 @Data
 public class DataConverterImpl implements DataConverter{
-
+    private static final Logger error = LoggerFactory.getLogger("error");
     @Override
     public GameItem convert(String str) {
         if(Objects.isNull(str) || str.isEmpty()){
-            throw new GameError("Not correct value. Try again.");
+            error.error("Not correct value.");
+            throw new GameError("Not correct value.");
         }
         str = str.toLowerCase(Locale.ROOT);
         if(GameItem.PAPER.toString().startsWith(str) && GameItem.PAPER.toString().contains(str)){
@@ -23,6 +26,7 @@ public class DataConverterImpl implements DataConverter{
             return GameItem.SCISSORS;
         }
 
-        throw new GameError("Not correct value. Try again.");
+        error.error("Not correct value.");
+        throw new GameError("Not correct value.");
     }
 }
