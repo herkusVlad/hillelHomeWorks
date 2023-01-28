@@ -8,24 +8,34 @@ import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 @Data
 public class GameControllerImpl implements GameController{
     private Player player;
     private Computer computer;
     private GameResult winner;
 
+    private ResourceBundle bundle;
     private static final Logger liveCycle = LoggerFactory.getLogger("live");
     private static final Logger logger = LoggerFactory.getLogger("stdout");
+
     public GameControllerImpl(Player player, Computer computer) {
         this.player = player;
         this.computer = computer;
     }
 
+    public GameControllerImpl(Player player, Computer computer, ResourceBundle bundle) {
+        this.player = player;
+        this.computer = computer;
+        this.bundle = bundle;
+    }
+
     public void startGame() {
-        logger.info("Game is started! Good luck!");
-        liveCycle.info("Game is started! Good luck!");
-        logger.info("If you will want end game enter: stop");
-        logger.info("You can type value in short style. Paper = p, Scissors = s, Rock = r");
+        logger.info(bundle.getString("game_start"));
+        liveCycle.info(bundle.getString("game_start"));
+        logger.info(bundle.getString("game_info"));
         player.setCountGame(0);
         player.setCountWinGame(0);
         player.setCountLoseGame(0);
@@ -34,9 +44,9 @@ public class GameControllerImpl implements GameController{
     public GameResult winner() {
         winner = GameResult.COMPUTER;
         GameItem cItem = computer.getItem();
-        logger.info("Computer value : " + cItem);
-        liveCycle.info("Computer value : " + cItem);
-        liveCycle.info("Player value : " + player.getItem());
+        logger.info(bundle.getString("com_value") + cItem);
+        liveCycle.info(bundle.getString("com_value") + cItem);
+        liveCycle.info(bundle.getString("player_value") + player.getItem());
         if(player.getItem() == cItem){
             winner = GameResult.DRAW;
             return winner;

@@ -2,10 +2,12 @@ import DTO.Computer;
 import DTO.GameResult;
 import DTO.Player;
 import Service.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class RunApplication {
@@ -17,19 +19,26 @@ public class RunApplication {
         Player player = new Player();
         Computer computer = new Computer();
 
-        GameController gameController = new GameControllerImpl(player, computer);
+        Locale defLocale = new Locale("ua");
+        if (args.length != 0) {
+            defLocale = new Locale(args[0]);
+        }
 
+        ResourceBundle
+                resourceBundle = ResourceBundle.getBundle("messages", defLocale);
+
+        GameController gameController = new GameControllerImpl(player, computer,resourceBundle);
         Scanner scanner = new Scanner(System.in);
-        logger.info("Hello, enter your name : ");
+        logger.info(resourceBundle.getString("hello"));
         player.setName(scanner.nextLine());
 
         DataConverter dataConverter = new DataConverterImpl();
-        logger.info("Player name : ".concat(player.getName()));
+        logger.info(resourceBundle.getString("name").concat(player.getName()));
         int countGame = 0;
         String endGame = "y";
         String countPlayerGame = "";
         do {
-            logger.info("How many game are you want play?");
+            logger.info(resourceBundle.getString("count_game"));
             countGame = scanner.nextInt();
             countPlayerGame = String.valueOf(countGame);
             gameController.startGame();
@@ -37,7 +46,7 @@ public class RunApplication {
                 String value = "1";
                 GameResult roundWinner;
 
-                logger.info("Enter your value : ");
+                logger.info(resourceBundle.getString("value"));
                 value = scanner.nextLine();
                 if (value.isEmpty()) {
                     value = scanner.nextLine();
@@ -49,18 +58,20 @@ public class RunApplication {
                 gameController.winner();
                 roundWinner = gameController.endRound();
 
-                String roundInfo = "Win in " + player.getCountGame() + " round is " + roundWinner;
+                String roundInfo = resourceBundle.getString("win_step_first") + player.getCountGame() +
+                        resourceBundle.getString("win_step_second") + roundWinner;
                 logger.info(roundInfo);
                 liveCycle.info(roundInfo);
                 countGame--;
             } while (countGame > 0);
-            String totalInfo = "Total winner is " + gameController.endGame()+". Count rounds : "+ countPlayerGame;
+            String totalInfo = resourceBundle.getString("total_win_first") + gameController.endGame()+
+                    resourceBundle.getString("total_win_second")+ countPlayerGame;
             logger.info(totalInfo);
             result.info(totalInfo);
 
-            logger.info("Do you want play again ? ");
+            logger.info(resourceBundle.getString("play_again"));
             endGame = scanner.nextLine().charAt(0) + "";
         } while (!endGame.equalsIgnoreCase("n"));
-        logger.info("See you later^_^");
+        logger.info(resourceBundle.getString("bye"));
     }
 }
