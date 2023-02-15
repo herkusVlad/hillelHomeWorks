@@ -66,4 +66,25 @@ public class MyCRUDImpl implements MyCRUD{
         sessionFactory.close();
         return students;
     }
+
+    @Override
+    public List<Student> getAllStudent() {
+        List<Student> student = new ArrayList<>();
+        sessionFactory = new Configuration().configure().buildSessionFactory();
+        try{
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            Query query = session.createQuery( "from Student where id > :studentId" );
+            query.setLong("studentId",0);
+            student = (List<Student>) query.list();
+            session.getTransaction().commit();
+            session.close();
+            sessionFactory.close();
+        }catch (Exception e){
+
+            System.err.println("Cannot get student with ID");
+        }
+
+        return student;
+    }
 }
